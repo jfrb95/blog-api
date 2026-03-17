@@ -5,3 +5,4 @@ Things involved:
   -  RESTfully organised URIs, for example: /posts/:postId/comments/:commentId
   -  gracefully-handled errors with correct error codes and useful messages
   -  validation checks and different roles for different levels of access, for security
+  -  data caching for improved performance using apicache
