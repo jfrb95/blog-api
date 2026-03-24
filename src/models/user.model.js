@@ -1,11 +1,14 @@
-const prisma = require('./prisma.js');
-
-const UserModel = function() {
+module.exports = (prisma) => {
   return {
-    testUserModel() {
-      console.log("user model success");
+    //GETs
+    findById(id) {
+      return prisma.user.findUnique({ where: { id } });
+    },
+
+    //POSTs
+    create(data) {
+      console.log("created");
+      return prisma.user.create({ data });
     }
   }
 };
-
-module.exports = UserModel();

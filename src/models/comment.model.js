@@ -1,9 +1,7 @@
-const prisma = require('./prisma.js');
-
-const CommentModel = function() {
+module.exports = (prisma) => {
   return {
-
+    test: function () {
+      return "nice";
+    }
   }
-}
-
-module.exports = CommentModel();
+};

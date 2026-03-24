@@ -6,7 +6,12 @@ const app = express();
 
 const { UserModel } = require('./models');
 
-UserModel.testUserModel();
+async function tempMain() {
+  console.log(await UserModel.findById(1));
+};
+
+tempMain();
+
 
 //END
 
