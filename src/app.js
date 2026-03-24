@@ -2,6 +2,14 @@ const express = require('express');
 
 const app = express();
 
+//MOVE THIS TO OTHER MODULES
+
+const { UserModel } = require('./models');
+
+UserModel.testUserModel();
+
+//END
+
 app.use('/', (req, res) => res.send("index"));
 app.use((err, req, res, next) => {
   console.error(err);
