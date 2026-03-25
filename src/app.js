@@ -1,4 +1,5 @@
 const express = require('express');
+const { UserRouter } = require('./routes');
 
 const app = express();
 
@@ -6,14 +7,16 @@ const app = express();
 
 const { UserModel } = require('./models');
 
+
 async function tempMain() {
-  console.log(await UserModel.findById(1));
+  //console.log(await UserModel.findById(1));
 };
 
 tempMain();
 
 //END
 
+app.use('/users', UserRouter);
 app.use('/', (req, res) => res.send("index"));
 app.use((err, req, res, next) => {
   console.error(err);

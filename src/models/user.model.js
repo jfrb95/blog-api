@@ -24,7 +24,7 @@ module.exports = (prisma) => {
 
     //PUTS
     update(id, data) {
-      return prisma.user.update({ where: { id }, data});
+      return prisma.user.update({ where: { id }, data });
     },
   }
 };
