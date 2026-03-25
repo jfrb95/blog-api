@@ -16,6 +16,9 @@ tempMain();
 
 //END
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use('/users', UserRouter);
 app.use('/', (req, res) => res.send("index"));
 app.use((err, req, res, next) => {

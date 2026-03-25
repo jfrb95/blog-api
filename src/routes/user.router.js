@@ -11,8 +11,14 @@ const router = Router();
 router.route('/')
   .get(async (req, res) => {
     const data = await UserModel.findAll();
-    res.json(data);
+    return res.json(data);
   })
 ;
+
+router.route('/:userId')
+  .put((req, res) => {
+    console.log(req.body);
+    return res.send(req.body);
+  })
 
 module.exports = router;
