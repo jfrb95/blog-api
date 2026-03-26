@@ -1,24 +1,23 @@
 const { Router } = require('express');
 
-//REMOVE THE FOLLOWING LATER IN DEVELOPMENT 
-//  - CURRENTLY BYPASSING CONTROLLERS
-
-const { UserModel } = require('../models');
-//END
+const { UserController } = require('../controllers');
 
 const router = Router();
 
 router.route('/')
-  .get(async (req, res) => {
-    const data = await UserModel.findAll();
-    return res.json(data);
+  .get(UserController.getAllUsers)
+  .post(async (req, res) => {
+    //need username, password, email
+    const data = req.body;
+    console.log('post', data);
+
+    const result = await UserModel.create(data);
+    return res.json(result);
   })
 ;
 
 router.route('/:userId')
-  .put((req, res) => {
-    console.log(req.body);
-    return res.send(req.body);
-  })
+  .put(UserController.updateUser);
+;
 
 module.exports = router;
