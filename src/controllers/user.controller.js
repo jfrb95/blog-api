@@ -69,6 +69,13 @@ const UserController = {
   },
   async deleteUser(req, res, next) {
     try {
+      //Test this to make sure cascading is working in prisma,
+      //  also see what it returns
+
+      const userId = getIdFromReq(req);
+
+      const result = await UserController.deleteUser(userId);
+      return res.json(result);
 
     } catch (err) {
       console.error(err);
