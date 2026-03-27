@@ -16,7 +16,10 @@ const UserController = {
   async getUserById(req, res, next) {
     try {
 
+      const userId = getIdFromReq(req);
       
+      const user = await UserModel.findById(userId);
+      return res.json(user);
 
     } catch(err) {
       console.error(err);

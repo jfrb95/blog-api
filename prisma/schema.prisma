@@ -36,7 +36,7 @@ model Post {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 
-  author    User    @relation(fields: [authorId], references: [id]) 
+  author    User    @relation(fields: [authorId], references: [id], onDelete: Cascade) 
   authorId  Int
   comments  Comment[]
 
@@ -53,10 +53,10 @@ model Comment {
   updatedAt   DateTime  @updatedAt
 
   authorId  Int
-  author    User  @relation(fields: [authorId], references: [id])
+  author    User  @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
   postId    Int
-  post      Post  @relation(fields: [postId], references: [id])
+  post      Post  @relation(fields: [postId], references: [id], onDelete: Cascade)
 
   @@index([postId])
   @@index([authorId])
