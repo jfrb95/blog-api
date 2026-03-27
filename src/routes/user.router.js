@@ -6,18 +6,21 @@ const router = Router();
 
 router.route('/')
   .get(UserController.getAllUsers)
-  .post(async (req, res) => {
-    //need username, password, email
-    const data = req.body;
-    console.log('post', data);
-
-    const result = await UserModel.create(data);
-    return res.json(result);
-  })
+  .post(UserController.createUser)
 ;
 
 router.route('/:userId')
-  .put(UserController.updateUser);
+  .get(UserController.getUserById)
+  .put(UserController.updateUser)
+  .delete(UserController.deleteUser)
+;
+
+router.route('./:userId/posts')
+  .get(UserController.getUserPosts)
+;
+
+router.route('./:userId/comments')
+  .get(UserController.getUserComments)
 ;
 
 module.exports = router;

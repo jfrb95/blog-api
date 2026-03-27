@@ -1,12 +1,12 @@
-const { UserModel, PostModel } = require('../models');
+const { UserModel, PostModel, CommentModel } = require('../models');
 
 const UserController = {
   //GETs
   async getAllUsers(req, res, next) {
     try {
 
-      const data = await UserModel.findAll();
-      return res.json(data);
+      const userList = await UserModel.findAll();
+      return res.json(userList);
 
     } catch(err) {
       console.error(err);
@@ -16,36 +16,55 @@ const UserController = {
   async getUserById(req, res, next) {
     try {
 
-      const id = getIdFromReq(req);
-      const data = req.body;
-
-      const result = await UserModel.update(id, data);
-      return res.json(result);
-
-    } catch(err) {
-      console.error(err);
-      next(err);
-    }
-  },
-  async getUserPosts(id) {
-    try {
       
+
     } catch(err) {
       console.error(err);
       next(err);
     }
   },
-  
-  //POSTs
-  async createUser() {
+  async getUserPosts(req, res, next) {
     try {
+      //Needs testing when posts can be created
+      const userId = getIdFromReq(req);
+
+      const userPosts = await PostModel.findByAuthorId(userId);
+      return res.json(userPosts);
+
+    } catch(err) {
+      console.error(err);
+      next(err);
+    }
+  },
+  async getUserComments(req, res, next) {
+    try {
+      //Needs testing when posts can be created
+      const userId = getIdFromReq(req);
+
+      const userComments = await CommentModel.findByAuthorId(userId);
+      return res.json(userComments);
 
     } catch (err) {
       console.error(err);
       next(err);
     }
   },
-  async deleteUser() {
+  
+  //POSTs
+  async createUser(req, res, next) {
+    try {
+
+      const data = req.body;
+
+      const result = await UserModel.create(data);
+      return res.json(result);
+
+    } catch (err) {
+      console.error(err);
+      next(err);
+    }
+  },
+  async deleteUser(req, res, next) {
     try {
 
     } catch (err) {
@@ -55,8 +74,14 @@ const UserController = {
   },
 
   //PUTs
-  async updateUser() {
+  async updateUser(req, res, next) {
     try {
+
+      const userId = getIdFromReq(req);
+      const data = req.body;
+
+      const result = await UserModel.update(userId, data);
+      return res.json(result);
 
     } catch (err) {
       console.error(err);
@@ -65,6 +90,7 @@ const UserController = {
   }
 };
 
+//Utilities
 function getIdFromReq(req) {
   return Number(req.params.userId);
 }
