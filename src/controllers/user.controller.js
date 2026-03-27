@@ -1,4 +1,4 @@
-const { UserModel } = require('../models');
+const { UserModel, PostModel } = require('../models');
 
 const UserController = {
   //GETs
@@ -29,7 +29,7 @@ const UserController = {
   },
   async getUserPosts(id) {
     try {
-
+      
     } catch(err) {
       console.error(err);
       next(err);
