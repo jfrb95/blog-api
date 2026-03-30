@@ -15,8 +15,4 @@ router.route('/:id')
   .delete(CommentController.deleteComment)
 ;
 
-router.route('./:id/comments')
-  .get(CommentController.getCommentComments)
-;
-
 module.exports = router;
