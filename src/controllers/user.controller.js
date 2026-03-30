@@ -1,6 +1,7 @@
 const { UserModel, PostModel, CommentModel } = require('../models');
+const { getIdFromReq } = require('../utils.js');
 
-const UserController = {
+module.exports = {
   //GETs
   async getAllUsers(req, res, next) {
     try {
@@ -8,7 +9,7 @@ const UserController = {
       const userList = await UserModel.findAll();
       return res.json(userList);
 
-    } catch(err) {
+    } catch (err) {
       console.error(err);
       next(err);
     }
@@ -17,11 +18,11 @@ const UserController = {
     try {
 
       const userId = getIdFromReq(req);
-      
+
       const user = await UserModel.findById(userId);
       return res.json(user);
 
-    } catch(err) {
+    } catch (err) {
       console.error(err);
       next(err);
     }
@@ -34,7 +35,7 @@ const UserController = {
       const userPosts = await PostModel.findByAuthorId(userId);
       return res.json(userPosts);
 
-    } catch(err) {
+    } catch (err) {
       console.error(err);
       next(err);
     }
@@ -52,7 +53,7 @@ const UserController = {
       next(err);
     }
   },
-  
+
   //POSTs
   async createUser(req, res, next) {
     try {
@@ -99,11 +100,3 @@ const UserController = {
     }
   }
 };
-
-//Utilities
-function getIdFromReq(req) {
-  return Number(req.params.userId);
-}
-
-
-module.exports = UserController;

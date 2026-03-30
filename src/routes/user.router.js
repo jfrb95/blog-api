@@ -9,17 +9,17 @@ router.route('/')
   .post(UserController.createUser)
 ;
 
-router.route('/:userId')
+router.route('/:id')
   .get(UserController.getUserById)
   .put(UserController.updateUser)
   .delete(UserController.deleteUser)
 ;
 
-router.route('./:userId/posts')
+router.route('./:id/posts')
   .get(UserController.getUserPosts)
 ;
 
-router.route('./:userId/comments')
+router.route('./:id/comments')
   .get(UserController.getUserComments)
 ;
 
