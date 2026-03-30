@@ -29,7 +29,7 @@ module.exports = {
   },
   async getUserPosts(req, res, next) {
     try {
-      //Needs testing when posts can be created
+
       const userId = getIdFromReq(req);
 
       const userPosts = await PostModel.findByAuthorId(userId);
@@ -42,7 +42,7 @@ module.exports = {
   },
   async getUserComments(req, res, next) {
     try {
-      //Needs testing when posts can be created
+      
       const userId = getIdFromReq(req);
 
       const userComments = await CommentModel.findByAuthorId(userId);
@@ -70,8 +70,6 @@ module.exports = {
   },
   async deleteUser(req, res, next) {
     try {
-      //Test this to make sure cascading is working in prisma,
-      //  also see what it returns
 
       const userId = getIdFromReq(req);
 
