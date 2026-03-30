@@ -47,7 +47,7 @@ module.exports = {
 
       const commentId = getIdFromReq(req);
 
-      const result = await CommentController.deleteComment(commentId);
+      const result = await CommentModel.deletee(commentId);
       return res.json(result);
 
     } catch (err) {

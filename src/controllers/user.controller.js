@@ -75,7 +75,7 @@ module.exports = {
 
       const userId = getIdFromReq(req);
 
-      const result = await UserController.deleteUser(userId);
+      const result = await UserModel.delete(userId);
       return res.json(result);
 
     } catch (err) {

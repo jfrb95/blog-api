@@ -59,7 +59,7 @@ module.exports = {
       
       const postId = getIdFromReq(req);
 
-      const result = await PostController.deletePost(postId);
+      const result = await PostModel.delete(postId);
       return res.json(result);
 
     } catch (err) {
