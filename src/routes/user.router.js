@@ -15,11 +15,11 @@ router.route('/:id')
   .delete(UserController.deleteUser)
 ;
 
-router.route('./:id/posts')
+router.route('/:id/posts')
   .get(UserController.getUserPosts)
 ;
 
-router.route('./:id/comments')
+router.route('/:id/comments')
   .get(UserController.getUserComments)
 ;
 

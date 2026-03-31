@@ -15,7 +15,7 @@ router.route('/:id')
   .delete(PostController.deletePost)
 ;
 
-router.route('./:id/comments')
+router.route('/:id/comments')
   .get(PostController.getPostComments)
 ;
 

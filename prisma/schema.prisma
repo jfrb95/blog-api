@@ -23,6 +23,9 @@ model User {
 
   posts     Post[]
   comments  Comment[]
+
+  @@index([email])
+  @@index([username])
 }
 
 model Post { 
