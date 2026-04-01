@@ -6,6 +6,23 @@ function verifyPassword(givenPassword, userPassword) {
   return givenPassword === userPassword;
 }
 
+function hashPassword(password) {
+  //add hashing here
+  return password;
+}
+
+function createJwt(user, options) {
+
+  //put all data that might be relevant inside of this object:
+  const payload = {
+    myId: user.id,
+  }
+
+  const secret = process.env.JWT_SECRET;
+
+  return jwt.sign(payload, secret, options);
+}
+
 module.exports = {
   async logUserIn(req, res, next) {
 
@@ -17,28 +34,48 @@ module.exports = {
         return res.status(401).json({ error: "Invalid credentials" });
       }
 
-      //put all data that might be relevant inside of this object:
-      const payload = {
-        myId: user.id,
-      }
-
-      const secret = process.env.JWT_SECRET;
-
       const options = {
-        expiresIn: "1d",
+        expiresIn: '1d',
       };
 
-      const token = jwt.sign(payload, secret, options);
+      const token = createJwt(user, options);
 
-      return res.send(token);
+      return res.status(201).json({ token });
+
     } catch (error) {
       console.error(error);
       next(error);
     }
   },
 
-  async signUserUp(req, res) {
+  async signUserUp(req, res, next) {
+    try {
+      
+      const existingUser = await UserModel.findByEmail(req.body.email);
+      if (existingUser) {
+        return res.status(409).json({ error: "User with that email already exists." });
+      }
 
+      const userData = {
+        email: req.body.email,
+        username: req.body.username,
+        password: hashPassword(req.body.password),
+        name: req.body.name || null,
+      }
+
+      const user = await UserModel.create(userData);
+
+      const options = {
+        expiresIn: '1d'
+      }
+      const token = createJwt(user, options);
+
+      return res.status(201).json({ token });
+
+    } catch (error) {
+      console.error(error);
+      next(error);
+    }
   },
 
   async logUserOut(req, res) {

@@ -27,6 +27,18 @@ module.exports = {
       next(err);
     }
   },
+  async getUserByEmail(req, res, next) {
+    try {
+      const userEmail = req.params.email;
+
+      const user = await UserModel.findByEmail(userEmail);
+      return res.json(user);
+
+    } catch (error) {
+      console.error(error);
+      next(error);
+    }
+  },
   async getUserPosts(req, res, next) {
     try {
 

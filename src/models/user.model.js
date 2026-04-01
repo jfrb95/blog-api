@@ -16,7 +16,6 @@ module.exports = (prisma) => {
 
     //POSTs
     create(data) {
-      console.log(data);
       return prisma.user.create({ data });
     },
     delete(id) {
