@@ -13,6 +13,7 @@ passport.use(new JwtStrategy(options, async (payload, done) => {
   try {
     
     const user = await UserModel.findById(payload.userId);
+    //change to include only the users necessary details
 
     if (user) {
       return done(null, user);

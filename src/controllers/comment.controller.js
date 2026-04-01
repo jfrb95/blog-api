@@ -1,4 +1,4 @@
-const { UserModel, PostModel, CommentModel } = require('../models');
+const { CommentModel } = require('../models');
 const { getIdFromReq } = require('../utils.js');
 
 module.exports = {
