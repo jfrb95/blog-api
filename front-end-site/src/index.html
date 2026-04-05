@@ -17,6 +17,24 @@
   </header>
 
   <main id="main">
+    <h1>The Blog</h1>
+
+    <section id="most-recent-posts">
+      <div class="section-container">
+        <!-- for a post item: title, excerpt, publishedAt, updatedAt, author -->
+         <ul class="card-list">
+          <li class="card-list-item">
+            {% include 'components/post-card.html' %}
+          </li>
+          <li class="card-list-item">
+            {% include 'components/post-card.html' %}
+          </li>
+          <li class="card-list-item">
+            {% include 'components/post-card.html' %}
+          </li>
+         </ul>
+      </div>
+    </section>
 
   </main>
 
