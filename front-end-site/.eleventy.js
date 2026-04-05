@@ -1,4 +1,9 @@
+const less = require('./src/config/processors/less.js');
+
 module.exports = async function(eleventyConfig) {
+
+  eleventyConfig.on('eleventy.after', less);
+
   return {
     dir: {
       input: "src", // Source files directory
