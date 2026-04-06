@@ -2,6 +2,10 @@ const less = require('./src/config/processors/less.js');
 
 module.exports = async function(eleventyConfig) {
 
+  eleventyConfig.addPassthroughCopy('./src/assets');
+
+  //nice
+
   eleventyConfig.on('eleventy.after', less);
 
   return {
