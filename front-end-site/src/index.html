@@ -1,47 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends "layouts/base.html" %}
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A community blog where authors can share articles, stories, and insights on various topics.">
-  
-  <link rel="stylesheet" href="/assets/css/root.css">
+{% block head %}
+<!--put index-specific style sheets here-->
+{% endblock %}
 
-  <title>The Blog</title>
-</head>
-<body>
-  
-  <header id="header">
+{% block body %}
 
-  </header>
+<h1>The Blog</h1>
 
-  <main id="main">
-    <h1>The Blog</h1>
+<section id="featured-post">
+  <div class="section-container">
+    <h2>Featured Post:</h2>
+    <div class="blog-card-large">
+      <img class="featured-image" src="" alt="">
+      <h3 class="title">title</h3>
+      <p class="author">author</p>
+      <p class="date">date</p>
+      <p class="excerpt">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque, nesciunt. Quod ex, ab porro vero molestiae quisquam, maiores voluptas odit in culpa quaerat amet obcaecati officiis? Debitis eveniet perferendis est!</p>
+    </div>
+  </div>
+</section>
 
-    <section id="recent-posts">
-      <div class="section-container">
-        <h2>Recent Posts</h2>
-        <!-- for a post item: title, excerpt, publishedAt, updatedAt, author -->
-         <ul class="card-list">
-          <li class="card-list-item">
-            {% include 'components/post-card.html' %}
+<section id="post-listing">
+  <div class="section-container">
+    <h2>All Posts</h2>
+    <ul>
+      <li>
+        {% include 'components/blog-card.html' %}
+      </li>
+      <li>
+        {% include 'components/blog-card.html' %}
+      </li>
+      <li>
+        {% include 'components/blog-card.html' %}
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="recent-authors">
+  <div class="section-container">
+    <h2>Recent Authors</h2>
+    <div class="carousel-window">
+      <div class="carousel-scroller">
+        <ul class="author-card-list">
+          <li class="author-li">
+            {% include 'components/author-card.html' %}
           </li>
-          <li class="card-list-item">
-            {% include 'components/post-card.html' %}
+          <li class="author-li">
+            <div class="author-card">
+              <img class="icon" src="" alt="">
+              <h3 class="name">Author Name</h3>
+              <p class="topics">topic 1</p>
+            </div>
           </li>
-          <li class="card-list-item">
-            {% include 'components/post-card.html' %}
+          <li class="author-li">
+            {% include 'components/author-card.html' %}
           </li>
-         </ul>
+          <li class="author-li">
+            {% include 'components/author-card.html' %}
+          </li>
+          <li class="author-li">
+            {% include 'components/author-card.html' %}
+          </li>
+          <li class="author-li">
+            {% include 'components/author-card.html' %}
+          </li>
+        </ul>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-  </main>
-
-  <footer id="footer">
-
-  </footer>
-
-</body>
-</html>
+{% endblock %}

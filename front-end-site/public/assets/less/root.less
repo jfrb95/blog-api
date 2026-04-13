@@ -25,14 +25,30 @@
     border: 1px dotted;
   }
 
+  h1 {
+    text-align: center;
+  }
+
   li {
     list-style-type: none;
   }
 }
 
-//Recent Posts Section
+//header
 @media only screen and (min-width: 0rem) {
-  #recent-posts {
+  #header {
+    display: flex;
+
+    .logo {
+      margin-right: auto;
+    }
+  }
+}
+
+
+//featured post Section
+@media only screen and (min-width: 0rem) {
+  #featured-post {
     padding: var(--sectionPadding);
 
     .section-container {
@@ -41,16 +57,124 @@
       margin: auto;
     }
 
-    .card-list {
+    .blog-card-large {
       display: flex;
-      justify-content: center;
-      gap: (32/16rem);
+      flex-wrap: wrap;
+
+      >* {
+        width: 100%;
+      }
+
+      .author,
+      .date {
+        width: 50%;
+      }
+
+      .date {
+        text-align: right;
+      }
+    }
+  }
+}
+
+//post listing
+@media only screen and (min-width: 0rem) {
+  #post-listing {
+    padding: var(--sectionPadding);
+    padding-top: 0;
+
+    .section-container {
+      width: 100%;
+      max-width: (1280/16rem);
+      margin: auto;
     }
 
-    .details {
+    .blog-card {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto 1fr;
+
+      .card-img {
+        grid-row: span 4;
+      }
+
+      .title {
+        grid-column: span 2;
+      }
+
+      .date {
+        text-align: right;
+      }
+
+      .card-description {
+        grid-column: span 2;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 0rem) {
+  #recent-authors {
+    --carouselBackground: grey;
+
+    padding: var(--sectionPadding);
+    padding-top: 0;
+
+    .section-container {
+      width: 100%;
+      max-width: (1280/16rem);
+      margin: auto;
+    }
+
+    .carousel-scroller {
+      background: var(--carouselBackground);
+    }
+
+    .author-card-list {
+      width: 100%;
       display: flex;
-      justify-content: space-between;
-      gap: (16/16)rem;
+      gap: 1rem;
+      overflow-x: auto;
+      //scrollbar-width: thin;
+      //scrollbar-color: #cbd5e1 #f8fafc;
+
+      &::-webkit-scrollbar {
+        height: (8/16rem);
+      }
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+        background-clip: content-box;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #f9f9f9;
+        border: 2px solid grey;
+        border-radius: 4px;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        
+      }
+    }
+
+    .author-li {
+      flex: 0 0 auto;
+
+      background-color: white;
+      width: clamp(150px, calc(33% - 0.66rem), 250px);
+      padding: (16/16rem) (8/16rem);
+    }
+
+    .author-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: (8/16rem);
+    }
+
+    .topics {
+      text-align: center;
     }
   }
 }
