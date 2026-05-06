@@ -1,3 +1,7 @@
+---
+permalink: "/"
+---
+
 {% extends "layouts/base.html" %}
 
 {% block head %}
@@ -24,16 +28,7 @@
 <section id="post-listing">
   <div class="section-container">
     <h2>All Posts</h2>
-    <ul>
-      <li>
-        {% include 'components/blog-card.html' %}
-      </li>
-      <li>
-        {% include 'components/blog-card.html' %}
-      </li>
-      <li>
-        {% include 'components/blog-card.html' %}
-      </li>
+    <ul id="post-list">
     </ul>
   </div>
 </section>
@@ -48,11 +43,7 @@
             {% include 'components/author-card.html' %}
           </li>
           <li class="author-li">
-            <div class="author-card">
-              <img class="icon" src="" alt="">
-              <h3 class="name">Author Name</h3>
-              <p class="topics">topic 1</p>
-            </div>
+            {% include 'components/author-card.html' %}
           </li>
           <li class="author-li">
             {% include 'components/author-card.html' %}
@@ -71,5 +62,7 @@
     </div>
   </div>
 </section>
+
+<script src="assets/js/pages/home.js"></script>
 
 {% endblock %}

@@ -1,7 +1,10 @@
+//core styles and reset
 @media only screen and (min-width: 0rem) {
   :root {
     //-- variables go here
     --sectionPadding: 2rem 1rem;
+    //728/16rem = 45.5px:
+    --contentMaxWidth: 45.5rem;
   }
 
   html,
@@ -34,6 +37,69 @@
   }
 }
 
+//common classes
+@media only screen and (min-width: 0rem) {
+  .section-container {
+    width: 100%;
+    max-width: (728/16rem);
+    margin: auto;
+  }
+
+  .user-icon {
+    width: (32/16rem);
+    height: (32/16rem);
+  }
+
+  .component-a-tag-wrapper {
+    display: block;
+  }
+}
+
+//components
+@media only screen and (min-width: 0rem) {
+  .blog-card {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto 1fr;
+
+    .card-img {
+      grid-row: span 4;
+    }
+
+    .title {
+      grid-column: span 2;
+    }
+
+    .date {
+      text-align: right;
+    }
+
+    .excerpt {
+      grid-column: span 2;
+    }
+  }
+
+  .comment {
+    width: 100%;
+    display: flex;
+    gap: (12/16rem);
+
+    .comment-byline {
+        display: flex;
+      }
+    
+    .comment-toolbar {
+      display: flex;
+  
+      .share {
+        margin-left: auto;
+      }
+    }
+  }
+
+
+}
+
 //header
 @media only screen and (min-width: 0rem) {
   #header {
@@ -46,16 +112,12 @@
 }
 
 
+//INDEX PAGE
+
 //featured post Section
 @media only screen and (min-width: 0rem) {
   #featured-post {
     padding: var(--sectionPadding);
-
-    .section-container {
-      width: 100%;
-      max-width: (1280/16rem);
-      margin: auto;
-    }
 
     .blog-card-large {
       display: flex;
@@ -81,50 +143,17 @@
 @media only screen and (min-width: 0rem) {
   #post-listing {
     padding: var(--sectionPadding);
-    padding-top: 0;
-
-    .section-container {
-      width: 100%;
-      max-width: (1280/16rem);
-      margin: auto;
-    }
-
-    .blog-card {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: auto auto 1fr;
-
-      .card-img {
-        grid-row: span 4;
-      }
-
-      .title {
-        grid-column: span 2;
-      }
-
-      .date {
-        text-align: right;
-      }
-
-      .card-description {
-        grid-column: span 2;
-      }
-    }
+    padding-top: 0;    
   }
 }
 
+//recent authors
 @media only screen and (min-width: 0rem) {
   #recent-authors {
     --carouselBackground: grey;
 
     padding: var(--sectionPadding);
     padding-top: 0;
-
-    .section-container {
-      width: 100%;
-      max-width: (1280/16rem);
-      margin: auto;
-    }
 
     .carousel-scroller {
       background: var(--carouselBackground);
