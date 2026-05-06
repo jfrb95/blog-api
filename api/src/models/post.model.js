@@ -13,6 +13,9 @@ module.exports = (prisma) => {
     //GETs
     findAll() {
       return prisma.post.findMany({
+        orderBy: {
+          createdAt: 'desc'
+        },
         include: includeAuthorData
       });
     },
@@ -26,6 +29,9 @@ module.exports = (prisma) => {
       //Needs testing
       return prisma.post.findUnique({ 
         where: { authorId },
+        orderBy: {
+          createdAt: 'desc'
+        },
         include: includeAuthorData
       });
     },
