@@ -1,11 +1,9 @@
 const includeAuthorData = {
-  include: {
-    author: {
-      select: {
-        id: true,
-        name: true,
-        username: true,
-      }
+  author: {
+    select: {
+      id: true,
+      name: true,
+      username: true,
     }
   }
 };
@@ -15,23 +13,21 @@ module.exports = (prisma) => {
     //GETs
     findAll() {
       return prisma.post.findMany({
-        include: {
-          author: {
-            select: {
-              id: true,
-              name: true,
-              username: true,
-            }
-          }
-        }
+        include: includeAuthorData
       });
     },
     findById(id) {
-      return prisma.post.findUnique({ where: { id }, includeAuthorData });
+      return prisma.post.findUnique({ 
+        where: { id }, 
+        include: includeAuthorData 
+      });
     },
     findByAuthorId(authorId) {
       //Needs testing
-      return prisma.post.findUnique({ where: { authorId, includeAuthorData } });
+      return prisma.post.findUnique({ 
+        where: { authorId },
+        include: includeAuthorData
+      });
     },
 
     //POSTs
