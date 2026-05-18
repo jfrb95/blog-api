@@ -5,8 +5,6 @@ module.exports = {
   async getFeaturedPost(req, res, next) {
     try {
 
-      return res.send("nice");
-      console.log("get featured post");
       const featuredPostId = await SiteSettingsModel.getFeaturedPostId();
       const featuredPost = await PostModel.getFeaturedPostId(featuredPostId);
       return res.json(featuredPost);
