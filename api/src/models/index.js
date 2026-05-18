@@ -5,10 +5,12 @@ const prisma = require('./prisma.js');
 const UserModel = require('./user.model.js')(prisma);
 const PostModel = require('./post.model.js')(prisma);
 const CommentModel = require('./comment.model.js')(prisma);
+const SiteSettingsModel = require('./siteSettings.model.js')(prisma);
 
 
 module.exports = {
   UserModel,
   PostModel,
-  CommentModel
+  CommentModel,
+  SiteSettingsModel,
 };

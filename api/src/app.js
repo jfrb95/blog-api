@@ -2,7 +2,13 @@ const cors = require('cors');
 const express = require('express');
 
 const passport = require('./config/passport.js');
-const { UserRouter, PostRouter, CommentRouter, AuthRouter } = require('./routes');
+const { 
+  UserRouter, 
+  PostRouter, 
+  CommentRouter, 
+  AuthRouter,
+  SiteSettingsRouter
+} = require('./routes');
 
 const app = express();
 
@@ -21,6 +27,7 @@ app.use('/auth', AuthRouter);
 app.use('/users', UserRouter);
 app.use('/posts', PostRouter);
 app.use('/comments', CommentRouter);
+app.use('/site-settings', SiteSettingsRouter);
 app.use('/', (req, res) => res.send("index"));
 app.use((err, req, res, next) => {
   console.error(err);

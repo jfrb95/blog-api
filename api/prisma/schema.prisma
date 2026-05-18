@@ -43,6 +43,8 @@ model Post {
   authorId  String
   comments  Comment[]
 
+  featuredInSettings  SiteSettings?
+
   @@index([slug])
   @@index([authorId])
   @@index([published])
@@ -69,4 +71,10 @@ enum Role {
   READER
   AUTHOR
   ADMIN
+}
+
+model SiteSettings {
+  id        String  @id @default("single")
+  featuredPostId  String? @unique
+  featuredPost    Post? @relation(fields: [featuredPostId], references: [id], onDelete: SetNull)
 }
