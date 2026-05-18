@@ -20,7 +20,8 @@ module.exports = {
     try {
 
       console.log("set featured post");
-      const newFeaturedPostId = req.newFeaturedPostId;
+      console.log(req.body);
+      const newFeaturedPostId = req.body.newFeaturedPostId;
 
       const result = await SiteSettingsModel.setFeaturedPost(newFeaturedPostId);
       return res.json(result);
