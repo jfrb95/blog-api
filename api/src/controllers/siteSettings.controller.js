@@ -6,8 +6,9 @@ module.exports = {
     try {
 
       const featuredPostId = await SiteSettingsModel.getFeaturedPostId();
-      const featuredPost = await PostModel.findById(featuredPostId);
-      return res.json(featuredPost);
+      //const featuredPost = await PostModel.findById(featuredPostId);
+      //return res.json(featuredPost);
+      return res.send("nice");
 
     } catch (err) {
       console.error(err);
