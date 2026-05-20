@@ -28,6 +28,11 @@ export type Post = $Result.DefaultSelection<Prisma.$PostPayload>
  * 
  */
 export type Comment = $Result.DefaultSelection<Prisma.$CommentPayload>
+/**
+ * Model SiteSettings
+ * 
+ */
+export type SiteSettings = $Result.DefaultSelection<Prisma.$SiteSettingsPayload>
 
 /**
  * Enums
@@ -197,6 +202,16 @@ export class PrismaClient<
     * ```
     */
   get comment(): Prisma.CommentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.siteSettings`: Exposes CRUD operations for the **SiteSettings** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SiteSettings
+    * const siteSettings = await prisma.siteSettings.findMany()
+    * ```
+    */
+  get siteSettings(): Prisma.SiteSettingsDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -247,8 +262,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 7.5.0
-   * Query Engine version: 280c870be64f457428992c43c1f6d557fab6e29e
+   * Prisma Client JS version: 7.6.0
+   * Query Engine version: 75cbdc1eb7150937890ad5465d861175c6624711
    */
   export type PrismaVersion = {
     client: string
@@ -633,7 +648,8 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     Post: 'Post',
-    Comment: 'Comment'
+    Comment: 'Comment',
+    SiteSettings: 'SiteSettings'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -649,7 +665,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "post" | "comment"
+      modelProps: "user" | "post" | "comment" | "siteSettings"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -875,6 +891,80 @@ export namespace Prisma {
           }
         }
       }
+      SiteSettings: {
+        payload: Prisma.$SiteSettingsPayload<ExtArgs>
+        fields: Prisma.SiteSettingsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SiteSettingsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SiteSettingsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SiteSettingsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SiteSettingsPayload>
+          }
+          findFirst: {
+            args: Prisma.SiteSettingsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SiteSettingsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SiteSettingsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SiteSettingsPayload>
+          }
+          findMany: {
+            args: Prisma.SiteSettingsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SiteSettingsPayload>[]
+          }
+          create: {
+            args: Prisma.SiteSettingsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SiteSettingsPayload>
+          }
+          createMany: {
+            args: Prisma.SiteSettingsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SiteSettingsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SiteSettingsPayload>[]
+          }
+          delete: {
+            args: Prisma.SiteSettingsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SiteSettingsPayload>
+          }
+          update: {
+            args: Prisma.SiteSettingsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SiteSettingsPayload>
+          }
+          deleteMany: {
+            args: Prisma.SiteSettingsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SiteSettingsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SiteSettingsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SiteSettingsPayload>[]
+          }
+          upsert: {
+            args: Prisma.SiteSettingsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SiteSettingsPayload>
+          }
+          aggregate: {
+            args: Prisma.SiteSettingsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSiteSettings>
+          }
+          groupBy: {
+            args: Prisma.SiteSettingsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SiteSettingsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SiteSettingsCountArgs<ExtArgs>
+            result: $Utils.Optional<SiteSettingsCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -986,6 +1076,7 @@ export namespace Prisma {
     user?: UserOmit
     post?: PostOmit
     comment?: CommentOmit
+    siteSettings?: SiteSettingsOmit
   }
 
   /* Types for Logging */
@@ -2471,6 +2562,7 @@ export namespace Prisma {
     authorId?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
     comments?: boolean | Post$commentsArgs<ExtArgs>
+    featuredInSettings?: boolean | Post$featuredInSettingsArgs<ExtArgs>
     _count?: boolean | PostCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["post"]>
 
@@ -2519,6 +2611,7 @@ export namespace Prisma {
   export type PostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
     comments?: boolean | Post$commentsArgs<ExtArgs>
+    featuredInSettings?: boolean | Post$featuredInSettingsArgs<ExtArgs>
     _count?: boolean | PostCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PostIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2533,6 +2626,7 @@ export namespace Prisma {
     objects: {
       author: Prisma.$UserPayload<ExtArgs>
       comments: Prisma.$CommentPayload<ExtArgs>[]
+      featuredInSettings: Prisma.$SiteSettingsPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2941,6 +3035,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     comments<T extends Post$commentsArgs<ExtArgs> = {}>(args?: Subset<T, Post$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    featuredInSettings<T extends Post$featuredInSettingsArgs<ExtArgs> = {}>(args?: Subset<T, Post$featuredInSettingsArgs<ExtArgs>>): Prisma__SiteSettingsClient<$Result.GetResult<Prisma.$SiteSettingsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3402,6 +3497,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: CommentScalarFieldEnum | CommentScalarFieldEnum[]
+  }
+
+  /**
+   * Post.featuredInSettings
+   */
+  export type Post$featuredInSettingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SiteSettings
+     */
+    select?: SiteSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SiteSettings
+     */
+    omit?: SiteSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SiteSettingsInclude<ExtArgs> | null
+    where?: SiteSettingsWhereInput
   }
 
   /**
@@ -4521,6 +4635,1049 @@ export namespace Prisma {
 
 
   /**
+   * Model SiteSettings
+   */
+
+  export type AggregateSiteSettings = {
+    _count: SiteSettingsCountAggregateOutputType | null
+    _min: SiteSettingsMinAggregateOutputType | null
+    _max: SiteSettingsMaxAggregateOutputType | null
+  }
+
+  export type SiteSettingsMinAggregateOutputType = {
+    id: string | null
+    featuredPostId: string | null
+  }
+
+  export type SiteSettingsMaxAggregateOutputType = {
+    id: string | null
+    featuredPostId: string | null
+  }
+
+  export type SiteSettingsCountAggregateOutputType = {
+    id: number
+    featuredPostId: number
+    _all: number
+  }
+
+
+  export type SiteSettingsMinAggregateInputType = {
+    id?: true
+    featuredPostId?: true
+  }
+
+  export type SiteSettingsMaxAggregateInputType = {
+    id?: true
+    featuredPostId?: true
+  }
+
+  export type SiteSettingsCountAggregateInputType = {
+    id?: true
+    featuredPostId?: true
+    _all?: true
+  }
+
+  export type SiteSettingsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SiteSettings to aggregate.
+     */
+    where?: SiteSettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SiteSettings to fetch.
+     */
+    orderBy?: SiteSettingsOrderByWithRelationInput | SiteSettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SiteSettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SiteSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SiteSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SiteSettings
+    **/
+    _count?: true | SiteSettingsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SiteSettingsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SiteSettingsMaxAggregateInputType
+  }
+
+  export type GetSiteSettingsAggregateType<T extends SiteSettingsAggregateArgs> = {
+        [P in keyof T & keyof AggregateSiteSettings]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSiteSettings[P]>
+      : GetScalarType<T[P], AggregateSiteSettings[P]>
+  }
+
+
+
+
+  export type SiteSettingsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SiteSettingsWhereInput
+    orderBy?: SiteSettingsOrderByWithAggregationInput | SiteSettingsOrderByWithAggregationInput[]
+    by: SiteSettingsScalarFieldEnum[] | SiteSettingsScalarFieldEnum
+    having?: SiteSettingsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SiteSettingsCountAggregateInputType | true
+    _min?: SiteSettingsMinAggregateInputType
+    _max?: SiteSettingsMaxAggregateInputType
+  }
+
+  export type SiteSettingsGroupByOutputType = {
+    id: string
+    featuredPostId: string | null
+    _count: SiteSettingsCountAggregateOutputType | null
+    _min: SiteSettingsMinAggregateOutputType | null
+    _max: SiteSettingsMaxAggregateOutputType | null
+  }
+
+  type GetSiteSettingsGroupByPayload<T extends SiteSettingsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SiteSettingsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SiteSettingsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SiteSettingsGroupByOutputType[P]>
+            : GetScalarType<T[P], SiteSettingsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SiteSettingsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    featuredPostId?: boolean
+    featuredPost?: boolean | SiteSettings$featuredPostArgs<ExtArgs>
+  }, ExtArgs["result"]["siteSettings"]>
+
+  export type SiteSettingsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    featuredPostId?: boolean
+    featuredPost?: boolean | SiteSettings$featuredPostArgs<ExtArgs>
+  }, ExtArgs["result"]["siteSettings"]>
+
+  export type SiteSettingsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    featuredPostId?: boolean
+    featuredPost?: boolean | SiteSettings$featuredPostArgs<ExtArgs>
+  }, ExtArgs["result"]["siteSettings"]>
+
+  export type SiteSettingsSelectScalar = {
+    id?: boolean
+    featuredPostId?: boolean
+  }
+
+  export type SiteSettingsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "featuredPostId", ExtArgs["result"]["siteSettings"]>
+  export type SiteSettingsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    featuredPost?: boolean | SiteSettings$featuredPostArgs<ExtArgs>
+  }
+  export type SiteSettingsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    featuredPost?: boolean | SiteSettings$featuredPostArgs<ExtArgs>
+  }
+  export type SiteSettingsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    featuredPost?: boolean | SiteSettings$featuredPostArgs<ExtArgs>
+  }
+
+  export type $SiteSettingsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SiteSettings"
+    objects: {
+      featuredPost: Prisma.$PostPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      featuredPostId: string | null
+    }, ExtArgs["result"]["siteSettings"]>
+    composites: {}
+  }
+
+  type SiteSettingsGetPayload<S extends boolean | null | undefined | SiteSettingsDefaultArgs> = $Result.GetResult<Prisma.$SiteSettingsPayload, S>
+
+  type SiteSettingsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SiteSettingsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SiteSettingsCountAggregateInputType | true
+    }
+
+  export interface SiteSettingsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SiteSettings'], meta: { name: 'SiteSettings' } }
+    /**
+     * Find zero or one SiteSettings that matches the filter.
+     * @param {SiteSettingsFindUniqueArgs} args - Arguments to find a SiteSettings
+     * @example
+     * // Get one SiteSettings
+     * const siteSettings = await prisma.siteSettings.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SiteSettingsFindUniqueArgs>(args: SelectSubset<T, SiteSettingsFindUniqueArgs<ExtArgs>>): Prisma__SiteSettingsClient<$Result.GetResult<Prisma.$SiteSettingsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SiteSettings that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SiteSettingsFindUniqueOrThrowArgs} args - Arguments to find a SiteSettings
+     * @example
+     * // Get one SiteSettings
+     * const siteSettings = await prisma.siteSettings.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SiteSettingsFindUniqueOrThrowArgs>(args: SelectSubset<T, SiteSettingsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SiteSettingsClient<$Result.GetResult<Prisma.$SiteSettingsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SiteSettings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SiteSettingsFindFirstArgs} args - Arguments to find a SiteSettings
+     * @example
+     * // Get one SiteSettings
+     * const siteSettings = await prisma.siteSettings.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SiteSettingsFindFirstArgs>(args?: SelectSubset<T, SiteSettingsFindFirstArgs<ExtArgs>>): Prisma__SiteSettingsClient<$Result.GetResult<Prisma.$SiteSettingsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SiteSettings that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SiteSettingsFindFirstOrThrowArgs} args - Arguments to find a SiteSettings
+     * @example
+     * // Get one SiteSettings
+     * const siteSettings = await prisma.siteSettings.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SiteSettingsFindFirstOrThrowArgs>(args?: SelectSubset<T, SiteSettingsFindFirstOrThrowArgs<ExtArgs>>): Prisma__SiteSettingsClient<$Result.GetResult<Prisma.$SiteSettingsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SiteSettings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SiteSettingsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SiteSettings
+     * const siteSettings = await prisma.siteSettings.findMany()
+     * 
+     * // Get first 10 SiteSettings
+     * const siteSettings = await prisma.siteSettings.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const siteSettingsWithIdOnly = await prisma.siteSettings.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SiteSettingsFindManyArgs>(args?: SelectSubset<T, SiteSettingsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SiteSettingsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SiteSettings.
+     * @param {SiteSettingsCreateArgs} args - Arguments to create a SiteSettings.
+     * @example
+     * // Create one SiteSettings
+     * const SiteSettings = await prisma.siteSettings.create({
+     *   data: {
+     *     // ... data to create a SiteSettings
+     *   }
+     * })
+     * 
+     */
+    create<T extends SiteSettingsCreateArgs>(args: SelectSubset<T, SiteSettingsCreateArgs<ExtArgs>>): Prisma__SiteSettingsClient<$Result.GetResult<Prisma.$SiteSettingsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SiteSettings.
+     * @param {SiteSettingsCreateManyArgs} args - Arguments to create many SiteSettings.
+     * @example
+     * // Create many SiteSettings
+     * const siteSettings = await prisma.siteSettings.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SiteSettingsCreateManyArgs>(args?: SelectSubset<T, SiteSettingsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SiteSettings and returns the data saved in the database.
+     * @param {SiteSettingsCreateManyAndReturnArgs} args - Arguments to create many SiteSettings.
+     * @example
+     * // Create many SiteSettings
+     * const siteSettings = await prisma.siteSettings.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SiteSettings and only return the `id`
+     * const siteSettingsWithIdOnly = await prisma.siteSettings.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SiteSettingsCreateManyAndReturnArgs>(args?: SelectSubset<T, SiteSettingsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SiteSettingsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a SiteSettings.
+     * @param {SiteSettingsDeleteArgs} args - Arguments to delete one SiteSettings.
+     * @example
+     * // Delete one SiteSettings
+     * const SiteSettings = await prisma.siteSettings.delete({
+     *   where: {
+     *     // ... filter to delete one SiteSettings
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SiteSettingsDeleteArgs>(args: SelectSubset<T, SiteSettingsDeleteArgs<ExtArgs>>): Prisma__SiteSettingsClient<$Result.GetResult<Prisma.$SiteSettingsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SiteSettings.
+     * @param {SiteSettingsUpdateArgs} args - Arguments to update one SiteSettings.
+     * @example
+     * // Update one SiteSettings
+     * const siteSettings = await prisma.siteSettings.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SiteSettingsUpdateArgs>(args: SelectSubset<T, SiteSettingsUpdateArgs<ExtArgs>>): Prisma__SiteSettingsClient<$Result.GetResult<Prisma.$SiteSettingsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SiteSettings.
+     * @param {SiteSettingsDeleteManyArgs} args - Arguments to filter SiteSettings to delete.
+     * @example
+     * // Delete a few SiteSettings
+     * const { count } = await prisma.siteSettings.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SiteSettingsDeleteManyArgs>(args?: SelectSubset<T, SiteSettingsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SiteSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SiteSettingsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SiteSettings
+     * const siteSettings = await prisma.siteSettings.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SiteSettingsUpdateManyArgs>(args: SelectSubset<T, SiteSettingsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SiteSettings and returns the data updated in the database.
+     * @param {SiteSettingsUpdateManyAndReturnArgs} args - Arguments to update many SiteSettings.
+     * @example
+     * // Update many SiteSettings
+     * const siteSettings = await prisma.siteSettings.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SiteSettings and only return the `id`
+     * const siteSettingsWithIdOnly = await prisma.siteSettings.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SiteSettingsUpdateManyAndReturnArgs>(args: SelectSubset<T, SiteSettingsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SiteSettingsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one SiteSettings.
+     * @param {SiteSettingsUpsertArgs} args - Arguments to update or create a SiteSettings.
+     * @example
+     * // Update or create a SiteSettings
+     * const siteSettings = await prisma.siteSettings.upsert({
+     *   create: {
+     *     // ... data to create a SiteSettings
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SiteSettings we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SiteSettingsUpsertArgs>(args: SelectSubset<T, SiteSettingsUpsertArgs<ExtArgs>>): Prisma__SiteSettingsClient<$Result.GetResult<Prisma.$SiteSettingsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SiteSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SiteSettingsCountArgs} args - Arguments to filter SiteSettings to count.
+     * @example
+     * // Count the number of SiteSettings
+     * const count = await prisma.siteSettings.count({
+     *   where: {
+     *     // ... the filter for the SiteSettings we want to count
+     *   }
+     * })
+    **/
+    count<T extends SiteSettingsCountArgs>(
+      args?: Subset<T, SiteSettingsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SiteSettingsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SiteSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SiteSettingsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SiteSettingsAggregateArgs>(args: Subset<T, SiteSettingsAggregateArgs>): Prisma.PrismaPromise<GetSiteSettingsAggregateType<T>>
+
+    /**
+     * Group by SiteSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SiteSettingsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SiteSettingsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SiteSettingsGroupByArgs['orderBy'] }
+        : { orderBy?: SiteSettingsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SiteSettingsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSiteSettingsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SiteSettings model
+   */
+  readonly fields: SiteSettingsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SiteSettings.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SiteSettingsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    featuredPost<T extends SiteSettings$featuredPostArgs<ExtArgs> = {}>(args?: Subset<T, SiteSettings$featuredPostArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SiteSettings model
+   */
+  interface SiteSettingsFieldRefs {
+    readonly id: FieldRef<"SiteSettings", 'String'>
+    readonly featuredPostId: FieldRef<"SiteSettings", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SiteSettings findUnique
+   */
+  export type SiteSettingsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SiteSettings
+     */
+    select?: SiteSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SiteSettings
+     */
+    omit?: SiteSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SiteSettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which SiteSettings to fetch.
+     */
+    where: SiteSettingsWhereUniqueInput
+  }
+
+  /**
+   * SiteSettings findUniqueOrThrow
+   */
+  export type SiteSettingsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SiteSettings
+     */
+    select?: SiteSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SiteSettings
+     */
+    omit?: SiteSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SiteSettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which SiteSettings to fetch.
+     */
+    where: SiteSettingsWhereUniqueInput
+  }
+
+  /**
+   * SiteSettings findFirst
+   */
+  export type SiteSettingsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SiteSettings
+     */
+    select?: SiteSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SiteSettings
+     */
+    omit?: SiteSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SiteSettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which SiteSettings to fetch.
+     */
+    where?: SiteSettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SiteSettings to fetch.
+     */
+    orderBy?: SiteSettingsOrderByWithRelationInput | SiteSettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SiteSettings.
+     */
+    cursor?: SiteSettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SiteSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SiteSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SiteSettings.
+     */
+    distinct?: SiteSettingsScalarFieldEnum | SiteSettingsScalarFieldEnum[]
+  }
+
+  /**
+   * SiteSettings findFirstOrThrow
+   */
+  export type SiteSettingsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SiteSettings
+     */
+    select?: SiteSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SiteSettings
+     */
+    omit?: SiteSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SiteSettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which SiteSettings to fetch.
+     */
+    where?: SiteSettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SiteSettings to fetch.
+     */
+    orderBy?: SiteSettingsOrderByWithRelationInput | SiteSettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SiteSettings.
+     */
+    cursor?: SiteSettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SiteSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SiteSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SiteSettings.
+     */
+    distinct?: SiteSettingsScalarFieldEnum | SiteSettingsScalarFieldEnum[]
+  }
+
+  /**
+   * SiteSettings findMany
+   */
+  export type SiteSettingsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SiteSettings
+     */
+    select?: SiteSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SiteSettings
+     */
+    omit?: SiteSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SiteSettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which SiteSettings to fetch.
+     */
+    where?: SiteSettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SiteSettings to fetch.
+     */
+    orderBy?: SiteSettingsOrderByWithRelationInput | SiteSettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SiteSettings.
+     */
+    cursor?: SiteSettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SiteSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SiteSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SiteSettings.
+     */
+    distinct?: SiteSettingsScalarFieldEnum | SiteSettingsScalarFieldEnum[]
+  }
+
+  /**
+   * SiteSettings create
+   */
+  export type SiteSettingsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SiteSettings
+     */
+    select?: SiteSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SiteSettings
+     */
+    omit?: SiteSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SiteSettingsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SiteSettings.
+     */
+    data?: XOR<SiteSettingsCreateInput, SiteSettingsUncheckedCreateInput>
+  }
+
+  /**
+   * SiteSettings createMany
+   */
+  export type SiteSettingsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SiteSettings.
+     */
+    data: SiteSettingsCreateManyInput | SiteSettingsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SiteSettings createManyAndReturn
+   */
+  export type SiteSettingsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SiteSettings
+     */
+    select?: SiteSettingsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SiteSettings
+     */
+    omit?: SiteSettingsOmit<ExtArgs> | null
+    /**
+     * The data used to create many SiteSettings.
+     */
+    data: SiteSettingsCreateManyInput | SiteSettingsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SiteSettingsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SiteSettings update
+   */
+  export type SiteSettingsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SiteSettings
+     */
+    select?: SiteSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SiteSettings
+     */
+    omit?: SiteSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SiteSettingsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SiteSettings.
+     */
+    data: XOR<SiteSettingsUpdateInput, SiteSettingsUncheckedUpdateInput>
+    /**
+     * Choose, which SiteSettings to update.
+     */
+    where: SiteSettingsWhereUniqueInput
+  }
+
+  /**
+   * SiteSettings updateMany
+   */
+  export type SiteSettingsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SiteSettings.
+     */
+    data: XOR<SiteSettingsUpdateManyMutationInput, SiteSettingsUncheckedUpdateManyInput>
+    /**
+     * Filter which SiteSettings to update
+     */
+    where?: SiteSettingsWhereInput
+    /**
+     * Limit how many SiteSettings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SiteSettings updateManyAndReturn
+   */
+  export type SiteSettingsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SiteSettings
+     */
+    select?: SiteSettingsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SiteSettings
+     */
+    omit?: SiteSettingsOmit<ExtArgs> | null
+    /**
+     * The data used to update SiteSettings.
+     */
+    data: XOR<SiteSettingsUpdateManyMutationInput, SiteSettingsUncheckedUpdateManyInput>
+    /**
+     * Filter which SiteSettings to update
+     */
+    where?: SiteSettingsWhereInput
+    /**
+     * Limit how many SiteSettings to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SiteSettingsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SiteSettings upsert
+   */
+  export type SiteSettingsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SiteSettings
+     */
+    select?: SiteSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SiteSettings
+     */
+    omit?: SiteSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SiteSettingsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SiteSettings to update in case it exists.
+     */
+    where: SiteSettingsWhereUniqueInput
+    /**
+     * In case the SiteSettings found by the `where` argument doesn't exist, create a new SiteSettings with this data.
+     */
+    create: XOR<SiteSettingsCreateInput, SiteSettingsUncheckedCreateInput>
+    /**
+     * In case the SiteSettings was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SiteSettingsUpdateInput, SiteSettingsUncheckedUpdateInput>
+  }
+
+  /**
+   * SiteSettings delete
+   */
+  export type SiteSettingsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SiteSettings
+     */
+    select?: SiteSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SiteSettings
+     */
+    omit?: SiteSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SiteSettingsInclude<ExtArgs> | null
+    /**
+     * Filter which SiteSettings to delete.
+     */
+    where: SiteSettingsWhereUniqueInput
+  }
+
+  /**
+   * SiteSettings deleteMany
+   */
+  export type SiteSettingsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SiteSettings to delete
+     */
+    where?: SiteSettingsWhereInput
+    /**
+     * Limit how many SiteSettings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SiteSettings.featuredPost
+   */
+  export type SiteSettings$featuredPostArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Post
+     */
+    select?: PostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Post
+     */
+    omit?: PostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostInclude<ExtArgs> | null
+    where?: PostWhereInput
+  }
+
+  /**
+   * SiteSettings without action
+   */
+  export type SiteSettingsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SiteSettings
+     */
+    select?: SiteSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SiteSettings
+     */
+    omit?: SiteSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SiteSettingsInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -4574,6 +5731,14 @@ export namespace Prisma {
   };
 
   export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
+
+
+  export const SiteSettingsScalarFieldEnum: {
+    id: 'id',
+    featuredPostId: 'featuredPostId'
+  };
+
+  export type SiteSettingsScalarFieldEnum = (typeof SiteSettingsScalarFieldEnum)[keyof typeof SiteSettingsScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -4755,6 +5920,7 @@ export namespace Prisma {
     authorId?: StringFilter<"Post"> | string
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
     comments?: CommentListRelationFilter
+    featuredInSettings?: XOR<SiteSettingsNullableScalarRelationFilter, SiteSettingsWhereInput> | null
   }
 
   export type PostOrderByWithRelationInput = {
@@ -4770,6 +5936,7 @@ export namespace Prisma {
     authorId?: SortOrder
     author?: UserOrderByWithRelationInput
     comments?: CommentOrderByRelationAggregateInput
+    featuredInSettings?: SiteSettingsOrderByWithRelationInput
   }
 
   export type PostWhereUniqueInput = Prisma.AtLeast<{
@@ -4788,6 +5955,7 @@ export namespace Prisma {
     authorId?: StringFilter<"Post"> | string
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
     comments?: CommentListRelationFilter
+    featuredInSettings?: XOR<SiteSettingsNullableScalarRelationFilter, SiteSettingsWhereInput> | null
   }, "id" | "slug">
 
   export type PostOrderByWithAggregationInput = {
@@ -4890,6 +6058,46 @@ export namespace Prisma {
     postId?: StringWithAggregatesFilter<"Comment"> | string
   }
 
+  export type SiteSettingsWhereInput = {
+    AND?: SiteSettingsWhereInput | SiteSettingsWhereInput[]
+    OR?: SiteSettingsWhereInput[]
+    NOT?: SiteSettingsWhereInput | SiteSettingsWhereInput[]
+    id?: StringFilter<"SiteSettings"> | string
+    featuredPostId?: StringNullableFilter<"SiteSettings"> | string | null
+    featuredPost?: XOR<PostNullableScalarRelationFilter, PostWhereInput> | null
+  }
+
+  export type SiteSettingsOrderByWithRelationInput = {
+    id?: SortOrder
+    featuredPostId?: SortOrderInput | SortOrder
+    featuredPost?: PostOrderByWithRelationInput
+  }
+
+  export type SiteSettingsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    featuredPostId?: string
+    AND?: SiteSettingsWhereInput | SiteSettingsWhereInput[]
+    OR?: SiteSettingsWhereInput[]
+    NOT?: SiteSettingsWhereInput | SiteSettingsWhereInput[]
+    featuredPost?: XOR<PostNullableScalarRelationFilter, PostWhereInput> | null
+  }, "id" | "featuredPostId">
+
+  export type SiteSettingsOrderByWithAggregationInput = {
+    id?: SortOrder
+    featuredPostId?: SortOrderInput | SortOrder
+    _count?: SiteSettingsCountOrderByAggregateInput
+    _max?: SiteSettingsMaxOrderByAggregateInput
+    _min?: SiteSettingsMinOrderByAggregateInput
+  }
+
+  export type SiteSettingsScalarWhereWithAggregatesInput = {
+    AND?: SiteSettingsScalarWhereWithAggregatesInput | SiteSettingsScalarWhereWithAggregatesInput[]
+    OR?: SiteSettingsScalarWhereWithAggregatesInput[]
+    NOT?: SiteSettingsScalarWhereWithAggregatesInput | SiteSettingsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SiteSettings"> | string
+    featuredPostId?: StringNullableWithAggregatesFilter<"SiteSettings"> | string | null
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -4980,6 +6188,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutPostsInput
     comments?: CommentCreateNestedManyWithoutPostInput
+    featuredInSettings?: SiteSettingsCreateNestedOneWithoutFeaturedPostInput
   }
 
   export type PostUncheckedCreateInput = {
@@ -4994,6 +6203,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     authorId: string
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
+    featuredInSettings?: SiteSettingsUncheckedCreateNestedOneWithoutFeaturedPostInput
   }
 
   export type PostUpdateInput = {
@@ -5008,6 +6218,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutPostsNestedInput
     comments?: CommentUpdateManyWithoutPostNestedInput
+    featuredInSettings?: SiteSettingsUpdateOneWithoutFeaturedPostNestedInput
   }
 
   export type PostUncheckedUpdateInput = {
@@ -5022,6 +6233,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
+    featuredInSettings?: SiteSettingsUncheckedUpdateOneWithoutFeaturedPostNestedInput
   }
 
   export type PostCreateManyInput = {
@@ -5128,6 +6340,40 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string
     postId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SiteSettingsCreateInput = {
+    id?: string
+    featuredPost?: PostCreateNestedOneWithoutFeaturedInSettingsInput
+  }
+
+  export type SiteSettingsUncheckedCreateInput = {
+    id?: string
+    featuredPostId?: string | null
+  }
+
+  export type SiteSettingsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    featuredPost?: PostUpdateOneWithoutFeaturedInSettingsNestedInput
+  }
+
+  export type SiteSettingsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    featuredPostId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SiteSettingsCreateManyInput = {
+    id?: string
+    featuredPostId?: string | null
+  }
+
+  export type SiteSettingsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SiteSettingsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    featuredPostId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -5314,6 +6560,11 @@ export namespace Prisma {
     isNot?: UserWhereInput
   }
 
+  export type SiteSettingsNullableScalarRelationFilter = {
+    is?: SiteSettingsWhereInput | null
+    isNot?: SiteSettingsWhereInput | null
+  }
+
   export type PostCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
@@ -5408,6 +6659,26 @@ export namespace Prisma {
     updatedAt?: SortOrder
     authorId?: SortOrder
     postId?: SortOrder
+  }
+
+  export type PostNullableScalarRelationFilter = {
+    is?: PostWhereInput | null
+    isNot?: PostWhereInput | null
+  }
+
+  export type SiteSettingsCountOrderByAggregateInput = {
+    id?: SortOrder
+    featuredPostId?: SortOrder
+  }
+
+  export type SiteSettingsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    featuredPostId?: SortOrder
+  }
+
+  export type SiteSettingsMinOrderByAggregateInput = {
+    id?: SortOrder
+    featuredPostId?: SortOrder
   }
 
   export type PostCreateNestedManyWithoutAuthorInput = {
@@ -5523,11 +6794,23 @@ export namespace Prisma {
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
   }
 
+  export type SiteSettingsCreateNestedOneWithoutFeaturedPostInput = {
+    create?: XOR<SiteSettingsCreateWithoutFeaturedPostInput, SiteSettingsUncheckedCreateWithoutFeaturedPostInput>
+    connectOrCreate?: SiteSettingsCreateOrConnectWithoutFeaturedPostInput
+    connect?: SiteSettingsWhereUniqueInput
+  }
+
   export type CommentUncheckedCreateNestedManyWithoutPostInput = {
     create?: XOR<CommentCreateWithoutPostInput, CommentUncheckedCreateWithoutPostInput> | CommentCreateWithoutPostInput[] | CommentUncheckedCreateWithoutPostInput[]
     connectOrCreate?: CommentCreateOrConnectWithoutPostInput | CommentCreateOrConnectWithoutPostInput[]
     createMany?: CommentCreateManyPostInputEnvelope
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+  }
+
+  export type SiteSettingsUncheckedCreateNestedOneWithoutFeaturedPostInput = {
+    create?: XOR<SiteSettingsCreateWithoutFeaturedPostInput, SiteSettingsUncheckedCreateWithoutFeaturedPostInput>
+    connectOrCreate?: SiteSettingsCreateOrConnectWithoutFeaturedPostInput
+    connect?: SiteSettingsWhereUniqueInput
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -5560,6 +6843,16 @@ export namespace Prisma {
     deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
   }
 
+  export type SiteSettingsUpdateOneWithoutFeaturedPostNestedInput = {
+    create?: XOR<SiteSettingsCreateWithoutFeaturedPostInput, SiteSettingsUncheckedCreateWithoutFeaturedPostInput>
+    connectOrCreate?: SiteSettingsCreateOrConnectWithoutFeaturedPostInput
+    upsert?: SiteSettingsUpsertWithoutFeaturedPostInput
+    disconnect?: SiteSettingsWhereInput | boolean
+    delete?: SiteSettingsWhereInput | boolean
+    connect?: SiteSettingsWhereUniqueInput
+    update?: XOR<XOR<SiteSettingsUpdateToOneWithWhereWithoutFeaturedPostInput, SiteSettingsUpdateWithoutFeaturedPostInput>, SiteSettingsUncheckedUpdateWithoutFeaturedPostInput>
+  }
+
   export type CommentUncheckedUpdateManyWithoutPostNestedInput = {
     create?: XOR<CommentCreateWithoutPostInput, CommentUncheckedCreateWithoutPostInput> | CommentCreateWithoutPostInput[] | CommentUncheckedCreateWithoutPostInput[]
     connectOrCreate?: CommentCreateOrConnectWithoutPostInput | CommentCreateOrConnectWithoutPostInput[]
@@ -5572,6 +6865,16 @@ export namespace Prisma {
     update?: CommentUpdateWithWhereUniqueWithoutPostInput | CommentUpdateWithWhereUniqueWithoutPostInput[]
     updateMany?: CommentUpdateManyWithWhereWithoutPostInput | CommentUpdateManyWithWhereWithoutPostInput[]
     deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
+  }
+
+  export type SiteSettingsUncheckedUpdateOneWithoutFeaturedPostNestedInput = {
+    create?: XOR<SiteSettingsCreateWithoutFeaturedPostInput, SiteSettingsUncheckedCreateWithoutFeaturedPostInput>
+    connectOrCreate?: SiteSettingsCreateOrConnectWithoutFeaturedPostInput
+    upsert?: SiteSettingsUpsertWithoutFeaturedPostInput
+    disconnect?: SiteSettingsWhereInput | boolean
+    delete?: SiteSettingsWhereInput | boolean
+    connect?: SiteSettingsWhereUniqueInput
+    update?: XOR<XOR<SiteSettingsUpdateToOneWithWhereWithoutFeaturedPostInput, SiteSettingsUpdateWithoutFeaturedPostInput>, SiteSettingsUncheckedUpdateWithoutFeaturedPostInput>
   }
 
   export type UserCreateNestedOneWithoutCommentsInput = {
@@ -5600,6 +6903,22 @@ export namespace Prisma {
     upsert?: PostUpsertWithoutCommentsInput
     connect?: PostWhereUniqueInput
     update?: XOR<XOR<PostUpdateToOneWithWhereWithoutCommentsInput, PostUpdateWithoutCommentsInput>, PostUncheckedUpdateWithoutCommentsInput>
+  }
+
+  export type PostCreateNestedOneWithoutFeaturedInSettingsInput = {
+    create?: XOR<PostCreateWithoutFeaturedInSettingsInput, PostUncheckedCreateWithoutFeaturedInSettingsInput>
+    connectOrCreate?: PostCreateOrConnectWithoutFeaturedInSettingsInput
+    connect?: PostWhereUniqueInput
+  }
+
+  export type PostUpdateOneWithoutFeaturedInSettingsNestedInput = {
+    create?: XOR<PostCreateWithoutFeaturedInSettingsInput, PostUncheckedCreateWithoutFeaturedInSettingsInput>
+    connectOrCreate?: PostCreateOrConnectWithoutFeaturedInSettingsInput
+    upsert?: PostUpsertWithoutFeaturedInSettingsInput
+    disconnect?: PostWhereInput | boolean
+    delete?: PostWhereInput | boolean
+    connect?: PostWhereUniqueInput
+    update?: XOR<XOR<PostUpdateToOneWithWhereWithoutFeaturedInSettingsInput, PostUpdateWithoutFeaturedInSettingsInput>, PostUncheckedUpdateWithoutFeaturedInSettingsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -5777,6 +7096,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     comments?: CommentCreateNestedManyWithoutPostInput
+    featuredInSettings?: SiteSettingsCreateNestedOneWithoutFeaturedPostInput
   }
 
   export type PostUncheckedCreateWithoutAuthorInput = {
@@ -5790,6 +7110,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
+    featuredInSettings?: SiteSettingsUncheckedCreateNestedOneWithoutFeaturedPostInput
   }
 
   export type PostCreateOrConnectWithoutAuthorInput = {
@@ -5946,6 +7267,19 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type SiteSettingsCreateWithoutFeaturedPostInput = {
+    id?: string
+  }
+
+  export type SiteSettingsUncheckedCreateWithoutFeaturedPostInput = {
+    id?: string
+  }
+
+  export type SiteSettingsCreateOrConnectWithoutFeaturedPostInput = {
+    where: SiteSettingsWhereUniqueInput
+    create: XOR<SiteSettingsCreateWithoutFeaturedPostInput, SiteSettingsUncheckedCreateWithoutFeaturedPostInput>
+  }
+
   export type UserUpsertWithoutPostsInput = {
     update: XOR<UserUpdateWithoutPostsInput, UserUncheckedUpdateWithoutPostsInput>
     create: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
@@ -5995,6 +7329,25 @@ export namespace Prisma {
     data: XOR<CommentUpdateManyMutationInput, CommentUncheckedUpdateManyWithoutPostInput>
   }
 
+  export type SiteSettingsUpsertWithoutFeaturedPostInput = {
+    update: XOR<SiteSettingsUpdateWithoutFeaturedPostInput, SiteSettingsUncheckedUpdateWithoutFeaturedPostInput>
+    create: XOR<SiteSettingsCreateWithoutFeaturedPostInput, SiteSettingsUncheckedCreateWithoutFeaturedPostInput>
+    where?: SiteSettingsWhereInput
+  }
+
+  export type SiteSettingsUpdateToOneWithWhereWithoutFeaturedPostInput = {
+    where?: SiteSettingsWhereInput
+    data: XOR<SiteSettingsUpdateWithoutFeaturedPostInput, SiteSettingsUncheckedUpdateWithoutFeaturedPostInput>
+  }
+
+  export type SiteSettingsUpdateWithoutFeaturedPostInput = {
+    id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SiteSettingsUncheckedUpdateWithoutFeaturedPostInput = {
+    id?: StringFieldUpdateOperationsInput | string
+  }
+
   export type UserCreateWithoutCommentsInput = {
     id?: string
     email: string
@@ -6033,6 +7386,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutPostsInput
+    featuredInSettings?: SiteSettingsCreateNestedOneWithoutFeaturedPostInput
   }
 
   export type PostUncheckedCreateWithoutCommentsInput = {
@@ -6046,6 +7400,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: string
+    featuredInSettings?: SiteSettingsUncheckedCreateNestedOneWithoutFeaturedPostInput
   }
 
   export type PostCreateOrConnectWithoutCommentsInput = {
@@ -6108,6 +7463,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutPostsNestedInput
+    featuredInSettings?: SiteSettingsUpdateOneWithoutFeaturedPostNestedInput
   }
 
   export type PostUncheckedUpdateWithoutCommentsInput = {
@@ -6121,6 +7477,79 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string
+    featuredInSettings?: SiteSettingsUncheckedUpdateOneWithoutFeaturedPostNestedInput
+  }
+
+  export type PostCreateWithoutFeaturedInSettingsInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    excerpt?: string | null
+    published?: boolean
+    publishedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    author: UserCreateNestedOneWithoutPostsInput
+    comments?: CommentCreateNestedManyWithoutPostInput
+  }
+
+  export type PostUncheckedCreateWithoutFeaturedInSettingsInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    excerpt?: string | null
+    published?: boolean
+    publishedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    authorId: string
+    comments?: CommentUncheckedCreateNestedManyWithoutPostInput
+  }
+
+  export type PostCreateOrConnectWithoutFeaturedInSettingsInput = {
+    where: PostWhereUniqueInput
+    create: XOR<PostCreateWithoutFeaturedInSettingsInput, PostUncheckedCreateWithoutFeaturedInSettingsInput>
+  }
+
+  export type PostUpsertWithoutFeaturedInSettingsInput = {
+    update: XOR<PostUpdateWithoutFeaturedInSettingsInput, PostUncheckedUpdateWithoutFeaturedInSettingsInput>
+    create: XOR<PostCreateWithoutFeaturedInSettingsInput, PostUncheckedCreateWithoutFeaturedInSettingsInput>
+    where?: PostWhereInput
+  }
+
+  export type PostUpdateToOneWithWhereWithoutFeaturedInSettingsInput = {
+    where?: PostWhereInput
+    data: XOR<PostUpdateWithoutFeaturedInSettingsInput, PostUncheckedUpdateWithoutFeaturedInSettingsInput>
+  }
+
+  export type PostUpdateWithoutFeaturedInSettingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    published?: BoolFieldUpdateOperationsInput | boolean
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    author?: UserUpdateOneRequiredWithoutPostsNestedInput
+    comments?: CommentUpdateManyWithoutPostNestedInput
+  }
+
+  export type PostUncheckedUpdateWithoutFeaturedInSettingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    published?: BoolFieldUpdateOperationsInput | boolean
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type PostCreateManyAuthorInput = {
@@ -6155,6 +7584,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUpdateManyWithoutPostNestedInput
+    featuredInSettings?: SiteSettingsUpdateOneWithoutFeaturedPostNestedInput
   }
 
   export type PostUncheckedUpdateWithoutAuthorInput = {
@@ -6168,6 +7598,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
+    featuredInSettings?: SiteSettingsUncheckedUpdateOneWithoutFeaturedPostNestedInput
   }
 
   export type PostUncheckedUpdateManyWithoutAuthorInput = {

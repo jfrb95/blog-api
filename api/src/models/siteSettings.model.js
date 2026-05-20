@@ -2,10 +2,13 @@ module.exports = (prisma) => {
   return {
     async getFeaturedPostId() {
 
-      //needs testing
       const featuredPostData = await prisma.siteSettings.findUnique({
         where: { id: "single" } //table has only 1 row and the id is "single"
       });
+
+      if (!featuredPostData) {
+        throw new Error("No featured post found.");
+      }
 
       const featuredPostId = featuredPostData.featuredPostId;
 

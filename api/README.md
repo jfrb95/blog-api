@@ -6,3 +6,7 @@ Things involved:
   -  gracefully-handled errors with correct error codes and useful messages
   -  validation checks and different roles for different levels of access, for security
   -  data caching for improved performance using the apicache middleware
+
+Things learned:
+  - test the api in local server, commit and push to git only when new feature is implemented properly - a push should not make the software stop working.
+  - there may be a way to use local database on development environ and online one in production.

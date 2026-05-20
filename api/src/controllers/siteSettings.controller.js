@@ -6,9 +6,9 @@ module.exports = {
     try {
 
       const featuredPostId = await SiteSettingsModel.getFeaturedPostId();
-      //const featuredPost = await PostModel.findById(featuredPostId);
-      //return res.json(featuredPost);
-      return res.send("nice");
+      //return res.send(featuredPostId);
+      const featuredPost = await PostModel.findById(featuredPostId);
+      return res.json(featuredPost);
 
     } catch (err) {
       console.error(err);
@@ -20,8 +20,6 @@ module.exports = {
   async setFeaturedPost(req, res, next) {
     try {
 
-      console.log("set featured post");
-      console.log(req.body);
       const newFeaturedPostId = req.body.newFeaturedPostId;
 
       const result = await SiteSettingsModel.setFeaturedPost(newFeaturedPostId);
@@ -32,10 +30,9 @@ module.exports = {
       next(err);
     }
   },
-  async removeFeaturedPost() {
+  async removeFeaturedPost(req, res, next) {
     try {
 
-      console.log("remove featured post");
       const result = await SiteSettingsModel.removeFeaturedPost();
       return res.json(result);
 
