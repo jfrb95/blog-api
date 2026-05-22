@@ -9,6 +9,10 @@ router.route('/')
   .post(UserController.createUser)
 ;
 
+router.route('/authors')
+  .get(UserController.getAuthors)
+;
+
 router.route('/:id')
   .get(UserController.getUserById)
   .put(UserController.updateUser)

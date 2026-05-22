@@ -65,6 +65,19 @@ module.exports = {
       next(err);
     }
   },
+  async getAuthors(req, res, next) {
+    try {
+
+      const limit = req.body.limit || null;
+
+      const authors = await UserModel.findAuthors(limit);
+      return res.json(authors);
+
+    } catch (err) {
+      console.error(err);
+      next(err);
+    }
+  },
 
   //POSTs
   async createUser(req, res, next) {
