@@ -67,8 +67,8 @@ module.exports = {
   },
   async getAuthors(req, res, next) {
     try {
-
-      const limit = req.body.limit || null;
+      
+      const limit = req.params.limit || null;
 
       const authors = await UserModel.findAuthors(limit);
       return res.json(authors);

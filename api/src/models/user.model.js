@@ -13,7 +13,7 @@ module.exports = (prisma) => {
     findByUsername(username) {
       return prisma.user.findUnique({ where: { username } });
     },
-    findAuthors(limit=null) {
+    findAuthors(limit = null) {
       const queryOptions = {
         where: {
           role: "AUTHOR"
