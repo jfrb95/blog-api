@@ -67,10 +67,11 @@ module.exports = {
   },
   async getAuthors(req, res, next) {
     try {
-      
-      const limit = req.params.limit || null;
+
+      const limit = Number(req.query.limit) || null;
 
       const authors = await UserModel.findAuthors(limit);
+      
       return res.json(authors);
 
     } catch (err) {
